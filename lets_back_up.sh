@@ -75,7 +75,7 @@ read option
 		echo "|----git init 완료----|"
 		echo "|--------------------|"
 
-		mv ~/.git/ ~/goinfre/42seoul-back-up/
+		mv ~/.git ~/goinfre/42seoul-back-up/
 		ln -s ~/goinfre/42seoul-back-up/.git ~/.git
 		echo "|--------------------|"
 		echo "|-----git add 시작----|"
