@@ -3,12 +3,11 @@
 today=`date +%Y-%m-%d`
 config=~/.42seoul_back_up_config.txt
 
-
 if [ -f $config ]
 then
 	echo "config 파일이 존재합니다."
 	echo "config 파일에 있는 url로 백업 설정을 시작합니다."
-	git_url=`echo $config`
+	git_url=`cat $config`
 	if [ -d ~/goinfre/42seoul-back-up/.git ]
 	then
 		if [ -h ~/.git ]
@@ -59,7 +58,6 @@ then
 	echo "|--------------------|"
 	echo "|----git push 완료----|"
 	echo "|--------------------|"
-
 else
 echo -e "처음 사용하는거라면 1을, 기존에 사용해왔다면 2를 입력해주세요: "
 read option
@@ -140,7 +138,6 @@ read option
 		echo "|--------------------|"
 		echo "|---config 저장 완료---|"
 		echo "|--------------------|"
-
 	else
 		echo "잘못 입력하셨습니다. 숫자로만 입력해주세요"
 	fi
