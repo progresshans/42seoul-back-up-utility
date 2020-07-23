@@ -12,6 +12,34 @@ function echo_string {
 	echo "-------------------------------------------------------------"
 }
 
+function git_choice {
+	echo -e "git 업로드라면 1을, git에 있는 것을 가져오려면 2를, git에 있는 것을 강제로 가져오려면 3을 입력하세요 : "
+	read git_option
+	if [ $git_option = 1 ]; then
+		git_add_commit_push
+	elif [ $git_option = 2 ]; then
+		git_pull
+	elif [ $git_option = 3 ]; then
+		git_pull_force
+	else
+		echo "잘못 입력하셨습니다. 숫자로만 입력해주세요"
+	fi
+}
+
+function git_pull_force {
+	echo_string "git pull(강제) 시작"
+	git fetch --all
+	git reset --hard origin/master
+	git pull origin master
+	echo_string "git pull(강제) 완료"
+}
+
+function git_pull {
+	echo_string "git pull 시작"
+	git pull origin master
+	echo_string "git pull 완료"
+}
+
 function git_add_commit_push {
 	echo_string "git add 시작! 경고가 떠도 무시하세요!"
 	git add --force .
@@ -44,7 +72,7 @@ if [ -f $home_config ]; then
 		cd ~
 		git pull origin master
 	fi
-	git_add_commit_push
+	git_choice
 else
 echo -e "처음 사용하는거라면 1을, 기존에 사용해왔다면 2를 입력해주세요: "
 read option
@@ -60,7 +88,7 @@ read option
 
 		mv ~/.git ~/goinfre/42seoul-back-up/home/
 		ln -s ~/goinfre/42seoul-back-up/home/.git/ ~/.git
-		git_add_commit_push
+		git_choice
 
 		echo $git_url_for_home >> .42seoul_back_up_home_config.txt
 		echo_string "home_config 저장 완료"
@@ -75,7 +103,7 @@ read option
 		ln -s ~/goinfre/42seoul-back-up/home/.git/ ~/.git
 		cd ~
 		git pull origin master
-		git_add_commit_push
+		git_choice
 		echo $git_url_for_home >> .42seoul_back_up_home_config.txt
 		echo_string "home_config 저장 완료"
 	else
