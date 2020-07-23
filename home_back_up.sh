@@ -55,6 +55,7 @@ read option
 		cd ~
 		rm -rf ~/.git/
 		git init
+		git remote add origin $home_config
 		echo_string "git init 완료"
 
 		mv ~/.git ~/goinfre/42seoul-back-up/home/
